@@ -2,7 +2,6 @@
     - Insert word list as a file
     - Manually traverse the trie
     - Check if trie is at a word end
-    - Store the trie in a file
 '''
 
 from typing import Dict, Optional
@@ -10,7 +9,7 @@ from typing import Dict, Optional
 class Trie:
     def __init__(self) -> None:
         self.data : Dict[str, Trie] = dict()
-        self.end = False
+        self.end : bool = False
 
     def read_file(self, file_path: str) -> None:
         ''' Read the file and insert the words into the trie '''
@@ -27,8 +26,12 @@ class Trie:
             self.data[word[0]] = Trie()
         self.data[word[0]].insert(word[1:])
 
+    def is_leaf(self):
+        return len(self.data) == 0
+
     def __getitem__(self, key: str) -> Optional['Trie']:
         assert len(key) == 1, 'Key must have exactly one character'
-        if key not in self.data:
-            self.data[key] = Trie()
         return self.data[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.data
