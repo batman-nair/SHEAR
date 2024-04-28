@@ -51,8 +51,8 @@ if __name__ == '__main__':
     parser.add_argument('sentence', type=str, help='The sentence to find words in')
     parser.add_argument('--min_word_coverage', type=float, default=0.7, help='Percentage of words in the sentence that must be touched by a word.')
     parser.add_argument('--only_first_n_char', type=int, default=3, help='Only consider the first n characters of each word')
-    parser.add_argument('--n_word_combinations', type=int, default=2, help='Maximum number of words that can be combined for a word')
-    parser.add_argument('--word_list', default='common', choices=['common', 'all'], help='The word list to use')
+    parser.add_argument('--n_word_combinations', type=int, default=1, help='Maximum number of words that can be combined for a word')
+    parser.add_argument('--word_list', default='all', choices=['common', 'all'], help='The word list to use')
     parser.add_argument('--output', default='output.txt', help='The output file to write the words to')
     args = parser.parse_args()
 
