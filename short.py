@@ -53,6 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('--only_first_n_char', type=int, default=3, help='Only consider the first n characters of each word')
     parser.add_argument('--n_word_combinations', type=int, default=2, help='Maximum number of words that can be combined for a word')
     parser.add_argument('--word_list', default='common', choices=['common', 'all'], help='The word list to use')
+    parser.add_argument('--output', default='output.txt', help='The output file to write the words to')
     args = parser.parse_args()
 
 
@@ -66,8 +67,8 @@ if __name__ == '__main__':
     words = get_words(*method_args)
     words = sorted(words, key=lambda x: (len(x.split('-')), x))
 
-    print(f'Got {len(words)} words. Writing to output.txt...')
+    print(f'Got {len(words)} words. Writing to {args.output}...')
     print(words)
-    with open('output.txt', 'w') as file:
+    with open(args.output, 'w') as file:
         for word in words:
             file.write(word + '\n')
