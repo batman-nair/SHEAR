@@ -15,7 +15,7 @@ def get_words(
         only_first_n_char: int=0,
         n_word_combinations: int=1
 ) -> List[str]:
-    ''' Method 2: Split the sentence into words and find all possible words'''
+    '''Split the sentence into words and find all possible words from character combinations.'''
 
     class State(NamedTuple):
         string: str
@@ -57,14 +57,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
 
-    method_args = [args.sentence.lower(), args.min_word_coverage, args.only_first_n_char, args.n_word_combinations]
-
     words_file = 'english-common-words.txt'
     if args.word_list == 'all':
         words_file = 'words_alpha.txt'
     print(f'Using {args.word_list} words list...')
     root_trie = setup_trie(words_file)
-    words = get_words(*method_args)
+
+    words = get_words(
+        args.sentence.lower(),
+        args.min_word_coverage,
+        args.only_first_n_char,
+        args.n_word_combinations)
     words = sorted(words, key=lambda x: (len(x.split('-')), x))
 
     print(f'Got {len(words)} words. Writing to {args.output}...')
